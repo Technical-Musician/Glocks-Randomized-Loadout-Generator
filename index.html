@@ -5,24 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Military Loadout Generator</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        button { padding: 10px 20px; margin-top: 20px; }
-        #loadout { margin-top: 20px; }
-        img { width: 100%; max-width: 400px; display: block; margin: 20px auto; }
-        select { padding: 10px; margin-bottom: 20px; }
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            text-align: center; /* Center all content */
+        }
+        h1 {
+            font-size: 36px; /* Increase title size */
+        }
+        select, button {
+            padding: 10px 20px;
+            font-size: 18px; /* Increase font size for dropdown and button */
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        #loadout {
+            margin-top: 30px;
+            font-size: 22px; /* Increase font size for the loadout */
+            line-height: 1.6; /* Space out the lines for readability */
+            text-align: center; /* Center the loadout text */
+        }
+        img {
+            width: 100%;
+            max-width: 400px;
+            display: block;
+            margin: 20px auto;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+        }
     </style>
 </head>
 <body>
     <h1>Glockodile's Random Military Loadout Generator</h1>
 
-    <img src="assets/military.gif">
+    <img src="assets/military.gif" alt="Military GIF">
 
     <label for="faction">Choose Faction:</label>
+    <br>
     <select id="faction">
         <option value="Western">Western</option>
-        <option value="Soviet">Soviet/Russian</option> <!-- Changed value to "Soviet" -->
+        <option value="Soviet">Soviet/Russian</option>
     </select>
 
+    <br>
     <button onclick="generateLoadout()">Generate Loadout</button>
 
     <div id="loadout"></div>
