@@ -41,21 +41,24 @@
     </style>
 </head>
 <body>
-    <h1>Glockodile's Random Military Loadout Generator</h1>
+    <div align="center"> <!-- Center all content -->
+        <h1>Glockodile's Random Military Loadout Generator</h1>
 
-    <img src="assets/military.gif" alt="Military GIF">
+        <img src="assets/military.gif" alt="Military GIF">
 
-    <label for="faction">Choose Faction:</label>
-    <br>
-    <select id="faction">
-        <option value="Western">Western</option>
-        <option value="Soviet">Soviet/Russian</option>
-    </select>
+        <label for="faction">Choose Faction:</label>
+        <br>
+        <select id="faction">
+            <option value="Western">Western</option>
+            <option value="Soviet">Soviet/Russian</option>
+        </select>
 
-    <br>
-    <button onclick="generateLoadout()">Generate Loadout</button>
+        <br>
+        <button onclick="generateLoadout()">Generate Loadout</button>
 
-    <div id="loadout"></div>
+        <div id="loadout"></div>
+    </div>
+</body>
 
     <script>
         const helmets = {
