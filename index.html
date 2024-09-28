@@ -9,114 +9,140 @@
         button { padding: 10px 20px; margin-top: 20px; }
         #loadout { margin-top: 20px; }
         img { width: 100%; max-width: 400px; display: block; margin: 20px auto; }
+        select { padding: 10px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <h1>Glockodile's Random Military Loadout Generator</h1>
 
-    <!--    if: humanoid.Nationality = Nationality.-(Filipino) then child:kick    -->
-   
     <img src="assets/military.gif">
+
+    <label for="faction">Choose Faction:</label>
+    <select id="faction">
+        <option value="Western">Western</option>
+        <option value="Soviet/Russian">Soviet/Russian</option>
+    </select>
 
     <button onclick="generateLoadout()">Generate Loadout</button>
 
     <div id="loadout"></div>
 
     <script>
-        const helmets = [
-            "PASGT Helmet", "MICH Helmet", "Ops-Core FAST Helmet", "MK6 Helmet", "VZ 95",
-            "Gefechtshelm M92", "Adrian Helmet", "SSh-68 Helmet", "Type 88 Helmet", "SPECTRA Helmet",
-            "Dyneema Helmet", "Cobra Plus Helmet", "CVC Helmet", "LWH Helmet", "Para Helmet", 
-            "MAROM Dolphin M1", "Armatus Ultralight Helmet", "ACH Helmet", "Striker ACH Helmet", 
-            "ZSH-1-2M"
-        ];
+        const helmets = {
+            Western: [
+                "PASGT Helmet", "MICH Helmet", "Ops-Core FAST Helmet", "MK6 Helmet", 
+                "Gefechtshelm M92", "Adrian Helmet", "Type 88 Helmet", "SPECTRA Helmet", 
+                "Dyneema Helmet", "Cobra Plus Helmet", "CVC Helmet", "LWH Helmet", 
+                "Para Helmet", "MAROM Dolphin M1", "Armatus Ultralight Helmet", 
+                "ACH Helmet", "Striker ACH Helmet"
+            ],
+            Soviet: [
+                "SSh-68 Helmet", "ZSH-1-2M", "6B47 Ratnik Helmet", "Altyn Helmet", 
+                "K6-3 Helmet", "Maska-1Sch", "Sfera-S Helmet", "Vulkan-5 Helmet"
+            ]
+        };
 
-        const armor = [
-            "IOTV", "Osprey Body Armor", "D3O Trauma Plates", "Dragon Skin", "6B45",
-            "CIRAS Vest", "RBA", "MTAR", "Flecktarn Vest", "KDH Defense Vest", 
-            "Fort Defender-2", "Ulan Tactical Vest", "OTV Interceptor Vest", "SOHPC", 
-            "LBV", "A-TACS FG Vest", "SBAV 2000 Vest", "T65 Combat Armor", 
-            "Type 85 Vest", "Eagle Industries Plate Carrier"
-        ];
+        const armor = {
+            Western: [
+                "IOTV", "Osprey Body Armor", "D3O Trauma Plates", "Dragon Skin", 
+                "CIRAS Vest", "RBA", "Flecktarn Vest", "KDH Defense Vest", 
+                "OTV Interceptor Vest", "SOHPC", "LBV", "A-TACS FG Vest", 
+                "SBAV 2000 Vest", "T65 Combat Armor", "Eagle Industries Plate Carrier"
+            ],
+            Soviet: [
+                "6B45", "Fort Defender-2", "Ulan Tactical Vest", "6B23 Body Armor", 
+                "6B43 Body Armor", "Korund-VM Armor", "Pantsir-S1 Body Armor", 
+                "Ratnik-3 Suit"
+            ]
+        };
 
-        const clothes = [
-            "Multicam", "Flecktarn", "Digital Flora", "CADPAT", "MARPAT", 
-            "DPM", "AOR-1", "Tigerstripe", "UCP", "TACAMO", 
-            "French CCE", "Särmä TST M05", "Desert DPM", "M81 Woodland", "Soviet TTsKO", 
-            "A-TACS AU", "A-TACS FG", "Type 07 Camouflage", "Vegatato Woodland", "Pixelado Camouflage"
-        ];
+        const primaryWeapons = {
+            Western: [
+                "M4 Carbine", "HK416", "FN SCAR", "Steyr AUG", "FAMAS F1", 
+                "Galil ACE", "L85A2", "SIG SG 550", "G36C", "Tavor TAR-21", 
+                "FN F2000", "HK G3", "ARX160", "CZ 805 BREN", "INSAS Rifle", "M16A4"
+            ],
+            Soviet: [
+                "AK-47", "AK-103", "QBZ-95", "Zastava M70", "AK-12", "AN-94", 
+                "AS Val", "VSS Vintorez", "RPK-74", "PKP Pecheneg", "AKS-74U", 
+                "SKS", "PPSh-41", "SVT-40", "SVD Dragunov", "OTs-14 Groza"
+            ]
+        };
 
-        const clothes_style = [
-            "Coveralls", "Tactical Shirt and Pants", "BDU (Battle Dress Uniform)", 
-            "Stealth Suit", "Field Jacket with Combat Pants", "Combat Overalls", 
-            "Flight Suit", "Tactical Hoodie with Cargo Pants", "Sniper Ghillie Suit", 
-            "Fleece Jacket and Tactical Pants", "Arctic Field Suit", "Wet Weather Suit", 
-            "Urban Tactical Outfit", "Lightweight Jungle Fatigues", "Desert Combat Ensemble"
-        ];
+        const secondaryWeapons = {
+            Western: [
+                "Glock 17", "M1911", "SIG Sauer P226", "Beretta M9", "CZ P-09", 
+                "Walther P99", "Desert Eagle", "FN Five-Seven", "Colt Python", 
+                "Smith & Wesson Model 29", "Browning Hi-Power", "H&K USP", 
+                "SIG Sauer P320", "Glock 19", "Jericho 941", "CZ 75", "Taurus PT92", "HK VP9"
+            ],
+            Soviet: [
+                "Stechkin APS", "Makarov PM", "Tokarev TT-33", "MP-443 Grach", 
+                "SR-1M Gyurza", "OTs-33 Pernach", "Nagant M1895", "PMM"
+            ]
+        };
 
-        const primary_weapons = [
-            "M4 Carbine", "AK-47", "HK416", "FN SCAR", "Steyr AUG", 
-            "FAMAS F1", "Galil ACE", "L85A2", "SIG SG 550", "G36C", 
-            "AK-103", "Tavor TAR-21", "QBZ-95", "FN F2000", "HK G3", 
-            "ARX160", "CZ 805 BREN", "Zastava M70", "INSAS Rifle", "M16A4"
-        ];
+        const grenades = {
+            Western: [
+                "M67 Fragmentation Grenade", "Mk 2 'Pineapple'", "M18 Smoke Grenade", 
+                "M84 Flashbang", "HG 85 Grenade", "DM51 Grenade", "No. 36 Mills Bomb", 
+                "ARGES 84", "AN-M8 HC Smoke Grenade", "DM41 Fragmentation Grenade", 
+                "Type 67 Fragmentation Grenade", "MK3 Offensive Grenade", 
+                "SFG87 Grenade", "L109A1", "K400 Smoke Grenade"
+            ],
+            Soviet: [
+                "RGD-5", "F1 Grenade", "RG-42 Fragmentation Grenade", "OF-37", 
+                "RGN Grenade", "RGO Grenade", "Zarya Flashbang", "K-51 Tear Gas Grenade"
+            ]
+        };
 
-        const secondary_weapons = [
-            "Glock 17", "M1911", "SIG Sauer P226", "Beretta M9", "CZ P-09", 
-            "Walther P99", "Desert Eagle", "FN Five-Seven", "Colt Python", 
-            "Smith & Wesson Model 29", "Browning Hi-Power", "H&K USP", "Stechkin APS", 
-            "Makarov PM", "SIG Sauer P320", "Glock 19", "Jericho 941", 
-            "CZ 75", "Taurus PT92", "HK VP9"
-        ];
+        const gadgets = {
+            Western: [
+                "AN/PVS-14 Night Vision Goggles", "PRC-152 Radio", "GPS (Garmin Foretrex 601)", 
+                "DR-10 UAV", "Flir Thermal Imager", "Laser Range Finder (Leica)", 
+                "Tactical Flashlight (SureFire)", "Wrist-Mounted GPS (Suunto Traverse)", 
+                "SORDIN Supreme Pro-X Hearing Protection", "Thermal Monocular (FLIR Scout)", 
+                "Binos (Zeiss Victory HT)", "Combat Knife (Ka-Bar)", "Paracord", 
+                "Cyalume Chemlights", "Lockpicking Kit", "Riot Shield", 
+                "EOD Bomb Defusal Robot", "Tactical Laser Sight", 
+                "Fiber Optic Camera", "Scouting Drone", "FPV Drone"
+            ],
+            Soviet: [
+                "1PN58 Night Vision Goggles", "R-168 Akveduk Radio", "GLONASS GPS", 
+                "Orlan-10 UAV", "Shakhin Thermal Imager", "SVR Range Finder", 
+                "Tactical Flashlight (Zenitco)", "Wrist-Mounted Compass", 
+                "Peltor Tactical Headset", "Shmel-M Rocket Flamethrower", 
+                "Binos (KOMZ 7x50)", "Combat Knife (NR-40)", "Spetsnaz Survival Kit", 
+                "Chemlights", "Breach Kit", "Ballistic Shield", 
+                "EOD Robot (Uran-6)", "Laser Target Designator", 
+                "Thermal Camera (Shahin)", "Recon Drone", "FPV Drone (Russian Military)"
+            ]
+        };
 
-        const grenades = [
-            "M67 Fragmentation Grenade", "RGD-5", "Mk 2 'Pineapple'", "M18 Smoke Grenade", 
-            "M84 Flashbang", "F1 Grenade", "HG 85 Grenade", "DM51 Grenade", 
-            "No. 36 Mills Bomb", "Type 97 Grenade", "ARGES 84", "AN-M8 HC Smoke Grenade", 
-            "DM41 Fragmentation Grenade", "Type 67 Fragmentation Grenade", 
-            "MK3 Offensive Grenade", "RG-42 Fragmentation Grenade", "OF-37", 
-            "SFG87 Grenade", "L109A1", "K400 Smoke Grenade"
-        ];
+        const clothes = {
+            Western: [
+                "Multicam", "Flecktarn", "CADPAT", "MARPAT", "DPM", 
+                "AOR-1", "Tigerstripe", "UCP", "TACAMO", "French CCE", 
+                "Desert DPM", "M81 Woodland", "A-TACS AU", "A-TACS FG", 
+                "Type 07 Camouflage", "Vegatato Woodland", "Pixelado Camouflage"
+            ],
+            Soviet: [
+                "Digital Flora", "Soviet TTsKO", "Gorka Suit", "Partizan Camo", 
+                "EMR (Russian Ratnik)", "Izlom Camo", "VSR-93 Flora", "SURPAT", 
+                "Berezka", "Tigr Camouflage"
+            ]
+        };
 
-        const gadgets = [
-            "AN/PVS-14 Night Vision Goggles", "PRC-152 Radio", "GPS (Garmin Foretrex 601)", 
-            "DR-10 UAV", "Flir Thermal Imager", "Laser Range Finder (Leica)", 
-            "Tactical Flashlight (SureFire)", "Wrist-Mounted GPS (Suunto Traverse)", 
-            "SORDIN Supreme Pro-X Hearing Protection", "Thermal Monocular (FLIR Scout)", 
-            "Binos (Zeiss Victory HT)", "Combat Knife (Ka-Bar)", "Paracord", 
-            "Cyalume Chemlights", "Lockpicking Kit", "Riot Shield", 
-            "EOD Bomb Defusal Robot", "Tactical Laser Sight", 
-            "Fiber Optic Camera", "Scouting Drone", "FPV Drone"
-        ];
-
-        function getRandomItem(arr) {
-            return arr[Math.floor(Math.random() * arr.length)];
-        }
-
-        function generateLoadout() {
-            const helmet = getRandomItem(helmets);
-            const bodyArmor = getRandomItem(armor);
-            const camoUniform = getRandomItem(clothes);
-            const style = getRandomItem(clothes_style);
-            const primaryWeapon = getRandomItem(primary_weapons);
-            const secondaryWeapon = getRandomItem(secondary_weapons);
-            const grenade = getRandomItem(grenades);
-            const gadget = getRandomItem(gadgets);
-
-            document.getElementById("loadout").innerHTML = `
-                <h2>Your Random Loadout:</h2>
-                <ul>
-                    <li><strong>Helmet:</strong> ${helmet}</li>
-                    <li><strong>Body Armor:</strong> ${bodyArmor}</li>
-                    <li><strong>Clothes:</strong> ${camoUniform}</li>
-                    <li><strong>Style of Clothes:</strong> ${style}</li>
-                    <li><strong>Primary Weapon:</strong> ${primaryWeapon}</li>
-                    <li><strong>Secondary Weapon:</strong> ${secondaryWeapon}</li>
-                    <li><strong>Grenade:</strong> ${grenade}</li>
-                    <li><strong>Gadget:</strong> ${gadget}</li>
-                </ul>
-            `;
-        }
-    </script>
-</body>
-</html>
+        const clothesStyle = {
+            Western: [
+                "Coveralls", "Tactical Shirt and Pants", "BDU (Battle Dress Uniform)", 
+                "Stealth Suit", "Field Jacket with Combat Pants", "Combat Overalls", 
+                "Flight Suit", "Tactical Hoodie with Cargo Pants", "Sniper Ghillie Suit", 
+                "Fleece Jacket and Tactical Pants", "Arctic Field Suit", "Wet Weather Suit", 
+                "Urban Tactical Outfit", "Lightweight Jungle Fatigues", "Desert Combat Ensemble"
+            ],
+            Soviet: [
+                "Ratnik Combat Suit", "Gorka Suit", "Sniper Suit", 
+                "Soviet BDU", "Winter Combat Uniform", "Spetsnaz Assault Suit", 
+                "Paratrooper Overalls", "Mountain Unit Gear", "Cold Weather Suit", 
+                "Partisan Jacket and Pants", "Urban Tactical Suit", "Field Gear Overalls"
