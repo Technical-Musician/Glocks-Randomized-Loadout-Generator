@@ -146,3 +146,38 @@
                 "Soviet BDU", "Winter Combat Uniform", "Spetsnaz Assault Suit", 
                 "Paratrooper Overalls", "Mountain Unit Gear", "Cold Weather Suit", 
                 "Partisan Jacket and Pants", "Urban Tactical Suit", "Field Gear Overalls"
+            ]
+        };
+
+        function getRandomItem(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function generateLoadout() {
+            const faction = document.getElementById("faction").value;
+            const helmet = getRandomItem(helmets[faction === "Western" ? "Western" : "Soviet"]);
+            const bodyArmor = getRandomItem(armor[faction === "Western" ? "Western" : "Soviet"]);
+            const primaryWeapon = getRandomItem(primaryWeapons[faction === "Western" ? "Western" : "Soviet"]);
+            const secondaryWeapon = getRandomItem(secondaryWeapons[faction === "Western" ? "Western" : "Soviet"]);
+            const grenade = getRandomItem(grenades[faction === "Western" ? "Western" : "Soviet"]);
+            const gadget = getRandomItem(gadgets[faction === "Western" ? "Western" : "Soviet"]);
+            const camoUniform = getRandomItem(clothes[faction === "Western" ? "Western" : "Soviet"]);
+            const style = getRandomItem(clothesStyle[faction === "Western" ? "Western" : "Soviet"]);
+
+            document.getElementById("loadout").innerHTML = `
+                <h2>Your ${faction} Loadout:</h2>
+                <ul>
+                    <li><strong>Helmet:</strong> ${helmet}</li>
+                    <li><strong>Body Armor:</strong> ${bodyArmor}</li>
+                    <li><strong>Primary Weapon:</strong> ${primaryWeapon}</li>
+                    <li><strong>Secondary Weapon:</strong> ${secondaryWeapon}</li>
+                    <li><strong>Grenade:</strong> ${grenade}</li>
+                    <li><strong>Gadget:</strong> ${gadget}</li>
+                    <li><strong>Camo Uniform:</strong> ${camoUniform}</li>
+                    <li><strong>Style of Clothes:</strong> ${style}</li>
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html>
