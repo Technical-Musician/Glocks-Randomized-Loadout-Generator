@@ -5,60 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Military Loadout Generator</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            padding: 20px; 
-            text-align: center; /* Center all content */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+            background-color: #121212;
+            color: #f0f0f0;
         }
+
         h1 {
-            font-size: 36px; /* Increase title size */
+            font-size: 36px;
         }
+
         select, button {
             padding: 10px 20px;
-            font-size: 18px; /* Increase font size for dropdown and button */
+            font-size: 18px;
             margin-top: 20px;
             margin-bottom: 20px;
+            background-color: #333;
+            color: #f0f0f0;
+            border: none;
         }
+
         #loadout {
             margin-top: 30px;
-            font-size: 22px; /* Increase font size for the loadout */
-            line-height: 1.6; /* Space out the lines for readability */
-            text-align: center; /* Center the loadout text */
+            font-size: 22px;
+            line-height: 1.6;
         }
+
         img {
             width: 100%;
             max-width: 400px;
             display: block;
             margin: 20px auto;
         }
+
         ul {
             list-style-type: none;
             padding: 0;
         }
+
         li {
             padding: 5px 0;
         }
     </style>
 </head>
 <body>
-    <div align="center"> <!-- Center all content -->
-        <h1>Glockodile's Random Military Loadout Generator</h1>
+    <h1>Glockodile's Random Military Loadout Generator</h1>
 
-        <img src="assets/military.gif" alt="Military GIF">
+    <img src="assets/military.gif" alt="Military GIF">
 
-        <label for="faction">Choose Faction:</label>
-        <br>
-        <select id="faction">
-            <option value="Western">Western</option>
-            <option value="Soviet">Soviet/Russian</option>
-        </select>
+    <label for="faction">Choose Faction:</label>
+    <br>
+    <select id="faction">
+        <option value="Western">Western</option>
+        <option value="Soviet">Soviet/Russian</option>
+        <option value="All">All Factions</option> <!-- New option to ignore faction limitations -->
+    </select>
 
-        <br>
-        <button onclick="generateLoadout()">Generate Loadout</button>
+    <br>
+    <button onclick="generateLoadout()">Generate Loadout</button>
 
-        <div id="loadout"></div>
-    </div>
-</body>
+    <div id="loadout"></div>
 
     <script>
         const helmets = {
@@ -188,17 +196,57 @@
 
         function generateLoadout() {
             const faction = document.getElementById("faction").value;
-            const helmet = getRandomItem(helmets[faction === "Western" ? "Western" : "Soviet"]);
-            const bodyArmor = getRandomItem(armor[faction === "Western" ? "Western" : "Soviet"]);
-            const primaryWeapon = getRandomItem(primaryWeapons[faction === "Western" ? "Western" : "Soviet"]);
-            const secondaryWeapon = getRandomItem(secondaryWeapons[faction === "Western" ? "Western" : "Soviet"]);
-            const grenade = getRandomItem(grenades[faction === "Western" ? "Western" : "Soviet"]);
-            const gadget = getRandomItem(gadgets[faction === "Western" ? "Western" : "Soviet"]);
-            const camoUniform = getRandomItem(clothes[faction === "Western" ? "Western" : "Soviet"]);
-            const style = getRandomItem(clothesStyle[faction === "Western" ? "Western" : "Soviet"]);
+
+            const helmet = getRandomItem(
+                faction === "All" 
+                ? helmets.Western.concat(helmets.Soviet) 
+                : helmets[faction === "Western" ? "Western" : "Soviet"]
+            );
+            
+            const bodyArmor = getRandomItem(
+                faction === "All" 
+                ? armor.Western.concat(armor.Soviet) 
+                : armor[faction === "Western" ? "Western" : "Soviet"]
+            );
+
+            const primaryWeapon = getRandomItem(
+                faction === "All" 
+                ? primaryWeapons.Western.concat(primaryWeapons.Soviet) 
+                : primaryWeapons[faction === "Western" ? "Western" : "Soviet"]
+            );
+            
+            const secondaryWeapon = getRandomItem(
+                faction === "All" 
+                ? secondaryWeapons.Western.concat(secondaryWeapons.Soviet) 
+                : secondaryWeapons[faction === "Western" ? "Western" : "Soviet"]
+            );
+
+            const grenade = getRandomItem(
+                faction === "All" 
+                ? grenades.Western.concat(grenades.Soviet) 
+                : grenades[faction === "Western" ? "Western" : "Soviet"]
+            );
+
+            const gadget = getRandomItem(
+                faction === "All" 
+                ? gadgets.Western.concat(gadgets.Soviet) 
+                : gadgets[faction === "Western" ? "Western" : "Soviet"]
+            );
+
+            const camoUniform = getRandomItem(
+                faction === "All" 
+                ? clothes.Western.concat(clothes.Soviet) 
+                : clothes[faction === "Western" ? "Western" : "Soviet"]
+            );
+
+            const style = getRandomItem(
+                faction === "All" 
+                ? clothesStyle.Western.concat(clothesStyle.Soviet) 
+                : clothesStyle[faction === "Western" ? "Western" : "Soviet"]
+            );
 
             document.getElementById("loadout").innerHTML = `
-                <h2>Your ${faction} Loadout:</h2>
+                <h2>Your ${faction === "All" ? "Mixed Faction" : faction} Loadout:</h2>
                 <ul>
                     <li><strong>Helmet:</strong> ${helmet}</li>
                     <li><strong>Body Armor:</strong> ${bodyArmor}</li>
