@@ -3,4 +3,4 @@ A randomized loadout generator for any application you may use it for, like art,
 
 ## Please put all suggestions to my Discord: _glockodile1230
 
-[https://technical-musician.github.io](https://technical-musician.github.io/Glocks-Randomized-Loadout-Generator/)
+[The website](https://technical-musician.github.io/Glocks-Randomized-Loadout-Generator/)
