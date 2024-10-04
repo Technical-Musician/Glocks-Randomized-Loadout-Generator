@@ -72,7 +72,7 @@
         <option value="Rifleman">Rifleman</option>
         <option value="Grenadier">Grenadier</option>
         <option value="AntiTank">Anti-Tank</option>
-        <option value="Tanker">Tanker</option> <!-- Added Tanker class -->
+        <option value="Tanker">Tanker</option>
     </select>
     <br>
 
@@ -82,13 +82,13 @@
 
     <script>
         const helmets = {
-            Western: ["PASGT Helmet", "MICH Helmet", "Ops-Core FAST Helmet", "MK6 Helmet", "Gefechtshelm M92", "Crewman Helmet"], // Added Crewman Helmet
-            Soviet: ["SSh-68 Helmet", "ZSH-1-2M", "6B47 Ratnik Helmet", "Altyn Helmet", "Tank Crew Helmet"] // Added Tank Crew Helmet
+            Western: ["PASGT Helmet", "MICH Helmet", "Ops-Core FAST Helmet", "MK6 Helmet", "Gefechtshelm M92", "Crewman Helmet"],
+            Soviet: ["SSh-68 Helmet", "ZSH-1-2M", "6B47 Ratnik Helmet", "Altyn Helmet", "Tank Crew Helmet"]
         };
 
         const armor = {
-            Western: ["IOTV", "Osprey Body Armor", "Dragon Skin", "CIRAS Vest", "Flecktarn Vest", "Light Rig"], // Added Light Rig
-            Soviet: ["6B45", "Fort Defender-2", "Ulan Tactical Vest", "6B23 Body Armor", "Light Rig"] // Added Light Rig
+            Western: ["IOTV", "Osprey Body Armor", "Dragon Skin", "CIRAS Vest", "Flecktarn Vest", "Light Rig"],
+            Soviet: ["6B45", "Fort Defender-2", "Ulan Tactical Vest", "6B23 Body Armor", "Light Rig"]
         };
 
         const primaryWeapons = {
@@ -98,7 +98,7 @@
                 Rifleman: ["M4 Carbine", "HK416", "FN SCAR", "Steyr AUG", "FAMAS F1", "L85A2", "M16A4", "G36", "SG550"],
                 Grenadier: ["M4 Carbine with M203", "HK416 with AG36", "FN SCAR with EGLM", "M16A4 with M203"],
                 AntiTank: ["MP5", "Uzi", "CZ Scorpion EVO 3", "FN P90", "Colt SMG", "UMP-45", "Steyr TMP"],
-                Tanker: ["MP5", "Uzi", "CZ Scorpion EVO 3", "FN P90", "Colt SMG", "UMP-45"] // Tanker uses SMGs
+                Tanker: ["MP5", "Uzi", "CZ Scorpion EVO 3", "FN P90", "Colt SMG", "UMP-45"]
             },
             Soviet: {
                 Sniper: ["SVD Dragunov", "VSS Vintorez", "SV-98", "OSV-96"],
@@ -106,7 +106,7 @@
                 Rifleman: ["AK-47", "AK-74", "AK-103", "AN-94", "AKS-74U", "Zastava M70"],
                 Grenadier: ["AK-74 with GP-25", "AK-103 with GP-30", "AN-94 with GP-25", "Zastava M70 with M79"],
                 AntiTank: ["PPSh-41", "PP-19 Vityaz", "PP-19 Bizon", "Kedr", "AKS-74U"],
-                Tanker: ["PPSh-41", "PP-19 Vityaz", "PP-19 Bizon", "Kedr", "AKS-74U"] // Soviet Tanker uses SMGs
+                Tanker: ["PPSh-41", "PP-19 Vityaz", "PP-19 Bizon", "Kedr", "AKS-74U"]
             }
         };
 
@@ -135,6 +135,17 @@
             Soviet: ["Ratnik Combat Suit", "Gorka Suit", "Sniper Suit", "Soviet BDU", "Winter Combat Uniform", "Spetsnaz Assault Suit"]
         };
 
+        const rocketLaunchers = {
+            Western: {
+                LightAT: ["M72 LAW", "AT4", "Panzerfaust 3", "Milkor MGL"],
+                HeavyAT: ["M47 Dragon", "M141 BDM", "Carl Gustaf M2", "Mk 153 SMAW"]
+            },
+            Soviet: {
+                LightAT: ["RPG-18", "RPG-22", "RPG-26", "RPG-30", "RPG-74"],
+                HeavyAT: ["RPG-7V2", "RPG-29", "RPG-16"]
+            }
+        };
+
         function getRandomItem(arr) {
             return arr[Math.floor(Math.random() * arr.length)];
         }
@@ -150,6 +161,13 @@
             const grenade = getRandomItem(faction === "All" ? grenades.Western.concat(grenades.Soviet) : grenades[faction]);
             const gadget = getRandomItem(faction === "All" ? gadgets.Western.concat(gadgets.Soviet) : gadgets[faction]);
 
+            let rocketLauncher = '';
+            if (selectedClass === "Grenadier") {
+                rocketLauncher = getRandomItem(faction === "All" ? rocketLaunchers.Western.LightAT.concat(rocketLaunchers.Soviet.LightAT) : rocketLaunchers[faction].LightAT);
+            } else if (selectedClass === "AntiTank") {
+                rocketLauncher = getRandomItem(faction === "All" ? rocketLaunchers.Western.HeavyAT.concat(rocketLaunchers.Soviet.HeavyAT) : rocketLaunchers[faction].HeavyAT);
+            }
+
             const camoUniform = getRandomItem(faction === "All" ? clothes.Western.concat(clothes.Soviet) : clothes[faction]);
             const style = getRandomItem(faction === "All" ? clothesStyle.Western.concat(clothesStyle.Soviet) : clothesStyle[faction]);
 
@@ -162,6 +180,7 @@
                     <li><strong>Secondary Weapon:</strong> ${secondaryWeapon}</li>
                     <li><strong>Grenade:</strong> ${grenade}</li>
                     <li><strong>Gadget:</strong> ${gadget}</li>
+                    ${rocketLauncher ? `<li><strong>Rocket Launcher:</strong> ${rocketLauncher}</li>` : ''}
                     <li><strong>Camo Uniform:</strong> ${camoUniform}</li>
                     <li><strong>Style of Clothes:</strong> ${style}</li>
                 </ul>
