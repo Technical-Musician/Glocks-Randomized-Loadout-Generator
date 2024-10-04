@@ -87,8 +87,8 @@
         };
 
         const armor = {
-            Western: ["IOTV", "Osprey Body Armor", "Dragon Skin", "CIRAS Vest", "Flecktarn Vest", "Light Rig"],
-            Soviet: ["6B45", "Fort Defender-2", "Ulan Tactical Vest", "6B23 Body Armor", "Light Rig"]
+            Western: ["IOTV", "Osprey Body Armor", "Dragon Skin", "CIRAS Vest", "Flecktarn Vest"],
+            Soviet: ["6B45", "Fort Defender-2", "Ulan Tactical Vest", "6B23 Body Armor"]
         };
 
         const primaryWeapons = {
@@ -103,7 +103,11 @@
             Soviet: {
                 Sniper: ["SVD Dragunov", "VSS Vintorez", "SV-98", "OSV-96"],
                 MachineGunner: ["PKM", "RPK-74", "PKP Pecheneg", "RPD"],
-                Rifleman: ["AK-47", "AK-74", "AK-103", "AN-94", "AKS-74U", "Zastava M70"],
+                Rifleman: [
+                    "AK-47", "AK-47 Type 3", "AKS-47", "AK-74", "AK-74N", "AKS-74", 
+                    "AKS-74U", "AK-74M", "AK-103", "AK-105", "AK-12", "AKM", "AN-94", 
+                    "Zastava M70", "Vepr-12"
+                ], // Expanded with more AK variants
                 Grenadier: ["AK-74 with GP-25", "AK-103 with GP-30", "AN-94 with GP-25", "Zastava M70 with M79"],
                 AntiTank: ["PPSh-41", "PP-19 Vityaz", "PP-19 Bizon", "Kedr", "AKS-74U"],
                 Tanker: ["PPSh-41", "PP-19 Vityaz", "PP-19 Bizon", "Kedr", "AKS-74U"]
@@ -155,7 +159,13 @@
             const selectedClass = document.getElementById("class").value;
 
             const helmet = getRandomItem(faction === "All" ? helmets.Western.concat(helmets.Soviet) : helmets[faction]);
-            const bodyArmor = getRandomItem(faction === "All" ? armor.Western.concat(armor.Soviet) : armor[faction]);
+
+            // Add Light Rig for Tankers only
+            let bodyArmor = getRandomItem(faction === "All" ? armor.Western.concat(armor.Soviet) : armor[faction]);
+            if (selectedClass === "Tanker") {
+                bodyArmor = "Light Rig"; // Override for Tankers to use Light Rig
+            }
+
             const primaryWeapon = getRandomItem(faction === "All" ? primaryWeapons.Western[selectedClass].concat(primaryWeapons.Soviet[selectedClass]) : primaryWeapons[faction][selectedClass]);
             const secondaryWeapon = getRandomItem(faction === "All" ? secondaryWeapons.Western.concat(secondaryWeapons.Soviet) : secondaryWeapons[faction === "Western" ? "Western" : "Soviet"]);
             const grenade = getRandomItem(faction === "All" ? grenades.Western.concat(grenades.Soviet) : grenades[faction]);
