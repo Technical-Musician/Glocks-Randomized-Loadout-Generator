@@ -603,6 +603,201 @@
     }
 };
 
+    // WWII Equipment
+    const ww2Helmets = {
+        Western: [
+            "M1 Steel Helmet", "British Brodie Helmet", "Canadian Mk. II Helmet",
+            "Australian Bush Hat", "British Tank Crew Helmet", "USMC Helmet",
+            "British Airborne Helmet", "USMC Steel Pot"
+        ],
+        Soviet: [
+            "SSh-39", "SSh-40", "SSh-36", "Tanker Helmet", "Aviator Helmet",
+            "NKVD Helmet", "Airborne Helmet"
+        ],
+        Mercenary: [
+            "Mixed WWII Helmets", "Vintage Military Helmet", "Modified Helmet",
+            "Surplus Helmet", "Repurposed Helmet", "Assorted Vintage Helmets"
+        ],
+        Insurgent: [
+            "Captured Enemy Helmet", "Vintage Civilian Hat", "No Helmet",
+            "Improvised Head Protection", "Repurposed Helmet", "Old Military Surplus"
+        ]
+    };
+
+    const ww2Armor = {
+        Western: [
+            "No Body Armor (Standard)", "Flak Jacket", "Tanker Overalls",
+            "Flight Suit", "Webbing Equipment", "Cartridge Belt",
+            "British Pattern 37 Webbing", "USMC Utility Vest"
+        ],
+        Soviet: [
+            "No Body Armor (Standard)", "Leather Jacket (Bomber)", 
+            "Tanker Overalls", "Greatcoat", "Webbing Equipment",
+            "Soldier's Greatcoat", "Leather Jerkin"
+        ],
+        Mercenary: [
+            "Mixed WWII Armor", "Vintage Protection", "Surplus Equipment",
+            "Old Webbing Systems", "Historical Kit", "Antique Protection"
+        ],
+        Insurgent: [
+            "No Armor", "Civilian Clothing", "Repurposed Gear",
+            "Captured Equipment", "Improvised Protection", "Old Military Surplus"
+        ]
+    };
+
+    const ww2PrimaryWeapons = {
+        Western: {
+            Sniper: [
+                "M1903 Springfield (Scoped)", "M1 Garand (Scoped)", "Enfield No.4 (Scoped)",
+                "Lee-Enfield No.4 Mk.I (Telescope)", "BAR (Scoped)", "M1 Carbine (Scoped)"
+            ],
+            MachineGunner: [
+                "Browning Automatic Rifle (BAR)", "M1919A4 Browning", "Lewis Gun",
+                "Vickers K Gun", "Bren Gun", "Stinger AA Gun", "Whitmore Turret Gun"
+            ],
+            Rifleman: [
+                "M1 Garand", "M1 Carbine", "M1903 Springfield", "Lee-Enfield No.4",
+                "Enfield No.4 Mk.I", "SMLE Mk III*", "Pattern 14", "MAS-36", "Lee-Enfield SMLE"
+            ],
+            Grenadier: [
+                "M1 Garand with M7 Grenade Launcher", "M1 Carbine with M8 Grenade Launcher",
+                "Lee-Enfield with No.4 Mk.I (Grenade)", "M1903 with M1 Grenade Launcher"
+            ],
+            AntiTank: [
+                "Bazooka M1/M1A1", "PIAT", "M1A1 Carbine with M6A2 HEAT Ammo", 
+                "Boys Anti-Tank Rifle", "Wombat Anti-Tank Rifle", "No. 68 AT Grenade"
+            ],
+            Tanker: [
+                "M1911 Pistol", "M1 Carbine", "Thompson Submachine Gun",
+                "Colt Revolver", "Welrod Pistol", "Webley Revolver"
+            ],
+            Medic: [
+                "M1 Carbine", "M1911 Pistol", "Revolver", "Lee-Enfield (Shortened)"
+            ],
+            Engineer: [
+                "M1 Garand", "M1 Carbine", "Thompson Submachine Gun", "M1903 Springfield",
+                "Bangalore Torpedo", "Explosive Charges", "Demolition Equipment"
+            ],
+            Recon: [
+                "M1903 Springfield (Scoped)", "Lee-Enfield No.4 (Scoped)", "M1 Carbine (Scoped)",
+                "De Lisle Carbine", "Welrod Pistol", "Silenced Lee-Enfield"
+            ]
+        },
+        Soviet: {
+            Sniper: [
+                "Mosin-Nagant M91/30 (PU Scope)", "SVT-40 (PE Scope)", "Mosin-Nagant M38 (PU)",
+                "Mosin-Nagant M91/30 (PE Scope)", "SVT-38 (PE Scope)"
+            ],
+            MachineGunner: [
+                "Degtyaryov DP-28", "Maxim M1910", "SG-43 Goryunov", "PTRD-41 AA Mount",
+                "ShKAS AA Machine Gun", "Degtyaryov DT Tank Machine Gun"
+            ],
+            Rifleman: [
+                "Mosin-Nagant M91/30", "Mosin-Nagant M38", "SVT-40", "SVT-38", 
+                "PPSh-41 (for support)", "PPS-43 (for support)", "Simonov SKS Prototype"
+            ],
+            Grenadier: [
+                "Mosin-Nagant M91/30 with Rifle Grenade", "RPG-40 Anti-Tank Grenade",
+                "RPG-43 Anti-Tank Grenade", "RG-42 Fragmentation Grenade"
+            ],
+            AntiTank: [
+                "PTRD-41 Anti-Tank Rifle", "PTRS-41 Anti-Tank Rifle", "RPG-40", 
+                "RPG-43 Anti-Tank Grenade", "No. 68 AT Grenade (Captured)", "Molotov Cocktail"
+            ],
+            Tanker: [
+                "Nagant M1895 Revolver", "Tokarev TT-30", "PPSh-41", "Nambu Pistol",
+                "M1911 (Captured)", "Welrod (Captured)"
+            ],
+            Medic: [
+                "Mosin-Nagant M38", "Tokarev TT-33", "PPSh-41 (Carbine Stock)", "No Weapon (Medical)"
+            ],
+            Engineer: [
+                "Mosin-Nagant M91/30", "PPSh-41", "PTAB Anti-Tank Bombs", "Explosives",
+                "F-1 Fragmentation Grenade", "RG-42 Fragmentation Grenade"
+            ],
+            Recon: [
+                "Mosin-Nagant M91/30 (PU Scope)", "SVT-40 (PE Scope)", "PPSh-41 (Silenced)",
+                "Nagant M1895 (Modified)", "Mosin-Nagant M38 (PU Scope)"
+            ]
+        },
+        Mercenary: {
+            Sniper: [
+                "Mixed Sniper Rifles", "Vintage Scoped Rifles", "Converted Hunting Rifles",
+                "Captured Enemy Rifles", "Modified Bolt Action Rifles", "Assorted Scoped Weapons"
+            ],
+            MachineGunner: [
+                "Mixed LMG Types", "Various Bolt Action Support", "Belt-Fed Weapons",
+                "Captured Foreign Weapons", "Surplus Machine Guns", "Mixed Caliber Support"
+            ],
+            Rifleman: [
+                "Mixed Bolt Action Rifles", "Various Carbines", "Captured Weapons",
+                "Surplus Military Rifles", "Converted Civilian Rifles", "Assorted Firearms"
+            ],
+            Grenadier: [
+                "Mixed Rifles with Launchers", "Assorted Grenade Systems", "Captured Mortars",
+                "Improvised Explosive Systems", "Mixed Explosive Delivery"
+            ],
+            AntiTank: [
+                "Mixed AT Weapons", "Various Anti-Tank Rifles", "Captured AT Weapons",
+                "Improvised Anti-Tank Measures", "Mixed AT Grenades", "Assorted AT Solutions"
+            ],
+            Tanker: [
+                "Mixed Sidearms", "Various Pistols", "Captured Weapons", 
+                "Surplus Personal Weapons", "Assorted Personal Defense"
+            ],
+            Medic: [
+                "Light Personal Arms", "Minimal Weaponry", "Sidearms Only", 
+                "Medical Personnel Identification"
+            ],
+            Engineer: [
+                "Mixed Small Arms", "Various Demolition Tools", "Assorted Explosives",
+                "Captured Engineering Equipment", "Mixed Demolition Packages"
+            ],
+            Recon: [
+                "Silenced Weapons", "Mixed Scoped Rifles", "Covert Action Firearms",
+                "Stealth-oriented Weapons", "Reconnaissance Arms", "Covert Firearms"
+            ]
+        },
+        Insurgent: {
+            Sniper: [
+                "Hunting Rifles", "Old Military Rifles", "Converted Civilian Rifles",
+                "Captured Military Rifles", "Improvised Scoped Weapons", "Vintage Rifles"
+            ],
+            MachineGunner: [
+                "Captured LMGs", "Old Military SMGs", "Converted Hunting Rifles",
+                "Captured Military Weapons", "Mixed Civilian/Military", "Improvised Support"
+            ],
+            Rifleman: [
+                "Old Military Surplus", "Hunting Rifles", "Captured Weapons",
+                "Converted Civilian Firearms", "Mixed Ammunition Types", "Irregular Weapons"
+            ],
+            Grenadier: [
+                "Improvised Grenades", "Captured Military Grenades", "Molotov Cocktails",
+                "Homemade Explosives", "Captured Mortars", "Irregular Explosive Delivery"
+            ],
+            AntiTank: [
+                "Molotov Cocktails", "Improvised Explosives", "Captured AT Weapons",
+                "Homemade Anti-Tank Weapons", "Irregular AT Solutions", "IEDs"
+            ],
+            Tanker: [
+                "Old Military Sidearms", "Captured Pistols", "Revolver", 
+                "Captured Military Weapons", "Improvised Personal Defense"
+            ],
+            Medic: [
+                "Minimal Weaponry", "Captured Sidearms", "No Weapon (Medical Symbol)",
+                "Light Personal Protection", "Minimal Defensive Arms"
+            ],
+            Engineer: [
+                "Captured Tools", "Improvised Demolition", "Homemade Explosives",
+                "Captured Military Equipment", "Irregular Engineering Tools", "Mixed Demolitions"
+            ],
+            Recon: [
+                "Captured Covert Arms", "Silenced Foreign Weapons", "Converted Hunting Rifles",
+                "Stealth-oriented Captured Arms", "Irregular Recon Weapons"
+            ]
+        }
+    };
+
     const nearFutureArmor = {
         Western: [
             "IOTV Gen IV", "SPCS Advanced", "Future Force Warrior System",
@@ -890,10 +1085,10 @@
             helmetsPool = modernHelmets; // Use modern helmets for now
             armorPool = nearFutureArmor;
             primaryWeaponsPool = modernPrimaryWeapons; // Use modern weapons for now
-        } else { // WW2 - would need WW2 equipment defined
-            helmetsPool = modernHelmets; // Fallback to modern for now
-            armorPool = modernArmor;
-            primaryWeaponsPool = modernPrimaryWeapons;
+        } else { // WW2
+            helmetsPool = ww2Helmets;
+            armorPool = ww2Armor;
+            primaryWeaponsPool = ww2PrimaryWeapons;
         }
 
         // Generate loadout items
